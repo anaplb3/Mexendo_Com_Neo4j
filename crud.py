@@ -3,22 +3,23 @@ from py2neo import Graph
 from banco import Dao
 
 app = Flask(__name__)
-graph = Graph("bolt://localhost:7687", auth=("neo4j", "anaehtop"))
-
-
+#graph = Graph("bolt://localhost:7687", auth=("neo4j", "anaehtop"))
 dao = Dao()
-result = dao.listando_todos()
 
-print(result)
+# print(result)
 
-print(dao.listando_por_nome("Juan"))
+print(dao.get_licitacao_nomeunidadegestora("Prefeitura Municipal de Santa In\u00eas"))
 
-@app.route('/')
+
+@app.route('/ooo')
 def olar():
-   return "b"
+    return "b"
 
 
+@app.route('/lic')
+def get_lic():
+   result = dao.get_licitacao()
+   return jsonify(result)
 
 
-app.run()
-
+app.run(debug=True)
