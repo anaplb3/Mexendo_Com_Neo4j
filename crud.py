@@ -8,17 +8,23 @@ dao = Dao()
 
 # print(result)
 
-print(dao.get_licitacao_nomeunidadegestora("Prefeitura Municipal de Santa In\u00eas"))
+#print(dao.get_licitacao_nomeunidadegestora("Prefeitura Municipal de Santa In\u00eas"))
 
 
-@app.route('/ooo')
+@app.route('/busca')
 def olar():
-    return "b"
+    result = dao.get_participante_por_codigo("10578305000139")
+    return jsonify(result)
 
+
+@app.route("/ano")
+def busca_ano():
+   result = dao.get_licitacao_por_ano("2016")
+   return jsonify(result)
 
 @app.route('/lic')
 def get_lic():
-   result = dao.get_licitacao()
+   result = dao.get_licitacoes()
    return jsonify(result)
 
 
