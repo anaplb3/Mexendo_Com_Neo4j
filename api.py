@@ -1,25 +1,26 @@
 from flask import Flask, jsonify
 from py2neo import Graph
 from banco import Dao
+from flask_cors import CORS
 
 app = Flask(__name__)
+
+CORS(app, resources=r"/api/*", headers="Content-Type")
+
 dao = Dao()
 
-@app.route('/')
+@app.route('/api')
 def olar():
     return "inicio"
 
-
-@app.route('/licitacoes')
+@app.route('/api/licitacoes')
 def get_json_licitacoes():
-   result = dao.get_licitacoes(2)
+   result = dao.get_licitacoes(10)
    return jsonify(result)
 
-@app.route('/participantes')
+@app.route('/api/participantes')
 def get_json_participantes():
-   result = dao.get_participantes(2)
+   result = dao.get_participantes(10)
    return jsonify(result)
-
-#print(dao.get_licitacao_nomeunidadegestora("Câmara Municipal de Alcantil"))
 
 app.run(debug=True)
