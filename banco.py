@@ -6,13 +6,13 @@ class Dao:
     def __init__(self):
         self.graph = Graph("bolt://localhost:7687", auth=("neo4j", "tcctcc"))
 
-    def get_licitacoes(self):
-        result = self.graph.run('match (x:Licitacao) return x')
+    def get_licitacoes(self, num_resultados):
+        result = self.graph.run('match (x:Licitacao) return x limit {num}', num=num_resultados)
         nodes = [n for n in result]
         return json.dumps(nodes)
 
-    def get_participantes(self):
-        result = self.graph.run('match (x:Participante) return x')
+    def get_participantes(self, num_resultados):
+        result = self.graph.run('match (x:Participante) return x limit {num}', num=num_resultados)
         nodes = [n for n in result]
         return json.dumps(nodes)
 

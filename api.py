@@ -12,12 +12,12 @@ def olar():
 
 @app.route('/licitacoes')
 def get_json_licitacoes():
-   result = dao.get_licitacoes()
+   result = dao.get_licitacoes(2)
    return jsonify(result)
 
 @app.route('/participantes')
 def get_json_participantes():
-   result = dao.get_participantes()
+   result = dao.get_participantes(2)
    return jsonify(result)
 
 #print(dao.get_licitacao_nomeunidadegestora("Câmara Municipal de Alcantil"))
