@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, render_template
 from py2neo import Graph
 from banco import Dao
 from flask_cors import CORS
@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 CORS(app, resources=r"/api/*", headers="Content-Type")
 
-dao = Dao()
+dao = Dao(0)
 
 @app.route('/api')
 def olar():

@@ -3,11 +3,13 @@ import json
 
 
 class Dao:
-    def __init__(self):
+    def __init__(self, num_pag):
         self.graph = Graph("bolt://localhost:7687", auth=("neo4j", "tcctcc"))
+        self.num_pag = num_pag
 
     def get_licitacoes(self, num_resultados):
-        result = self.graph.run('match (x:Licitacao) return x limit {num}', num=num_resultados)
+        result = self.graph.run('start lic=node({num_pag}) match (lic:Licitacao) return lic SKIP 0 limit {num}',num_pag = self.num_pag, num=num_resultados)
+        self.num_pag += 1
         nodes = [n for n in result]
         return nodes
 
